@@ -4,7 +4,15 @@
 
 **🌐 Live app: [eerflab.com](https://eerflab.com)** · runs 100 % in your browser · no install · no account · works offline
 
-**🇻🇳 Phòng thí nghiệm Điện – Điện tử – RF miễn phí, chạy hoàn toàn offline trong trình duyệt: từ sơ đồ mạch → hàm truyền H(s) → Bode / quỹ đạo nghiệm / không gian trạng thái → mô phỏng vật lý thật → và gợi ý ngược lại topology mạch.**
+**Phòng thí nghiệm Điện – Điện tử – RF miễn phí, chạy hoàn toàn offline trong trình duyệt: từ sơ đồ mạch → hàm truyền H(s) → Bode / quỹ đạo nghiệm / không gian trạng thái → mô phỏng vật lý thật → và gợi ý ngược lại topology mạch.**
+
+![Full 22-transistor Class-AB power amplifier — decoded 1:1 from the original schematic print, DC operating point solved and simulated live with parameter sliders](10-classab-22bjt-tune.png)
+
+**How complex can it get?** A **22-transistor** Class-AB power amplifier and a **74-part / 161-wire** SG3525 H-bridge switching inverter — every junction a real exponential device, all solved together by one nonlinear MNA engine, running live in a browser tab. · **Mạch phức tạp đến đâu?** Ampli công suất 22 transistor và mạch nghịch lưu cầu H 74 linh kiện / 161 dây — mỗi mối nối là một linh kiện phi tuyến thật, được giải đồng thời và chạy trực tiếp trong trình duyệt.
+
+| | |
+|---|---|
+| ![SG3525 + IRFZ44N H-bridge inverter running live — a 12 V battery becomes 230 V / 50 Hz on the oscilloscope](09-sg3525-inverter-live.png) | ![Type any H(s) → the studio designs the circuit for you: cascade op-amp stages and an analog-computer integrator chain with real E-series values](11-hs-realizations-cascade.png) |
 
 ---
 
@@ -61,8 +69,9 @@ That loop — **circuit → math → circuit** — is what makes eerfLab a *stud
 
 | | |
 |---|---|
-| ![SG3525 12V→230V inverter running live — exact-MPN chip popup + 230 V quasi-square on the scope](09-sg3525-inverter-live.png) | ![Full 22-transistor Class-AB amplifier simulating with live parameter sliders](10-classab-22bjt-tune.png) |
-| ![H(s) → Circuit: cascade realization + analog-computer integrator chain with concrete values](11-hs-realizations-cascade.png) | ![Bode with gain/phase margins, control view, state-space export](12-bode-gm-pm.png) |
+| ![Bode plot with gain & phase margin markers, computed exactly from the drawn circuit](12-bode-gm-pm.png) | ![Root locus — poles, zeros, asymptotes and closed-loop gain sweep](15-root-locus.png) |
+| ![Control view: loop shaping and closed-loop response side by side](16-control-view-closedloop.png) | ![Honest step response — real solver output with settling metrics, never a faked curve](17-step-response-honest.png) |
+| ![Load-example menu: auto-running teaching circuits, each with a bilingual engineering walk-through](13-live-examples-menu.png) | ![Exact-part picker — 93 datasheet-verified ICs chosen by real manufacturer part number](14-exact-part-picker.png) |
 | ![Live Class-AB amplifier](01-circuit-live-amp.png) | ![Diode & zener live physics](02-diode-zener-live.png) |
 | ![H(s) → circuit synthesis](03-hs-synthesis.png) | ![Block diagrams & Mason](04-block-mason.png) |
 | ![RF Lab Smith chart matching](05-rf-smith-match.png) | ![Modulation & EVM](06-modulation-evm.png) |
