@@ -61,6 +61,8 @@ That loop — **circuit → math → circuit** — is what makes eerfLab a *stud
 
 | | |
 |---|---|
+| ![SG3525 12V→230V inverter running live — exact-MPN chip popup + 230 V quasi-square on the scope](09-sg3525-inverter-live.png) | ![Full 22-transistor Class-AB amplifier simulating with live parameter sliders](10-classab-22bjt-tune.png) |
+| ![H(s) → Circuit: cascade realization + analog-computer integrator chain with concrete values](11-hs-realizations-cascade.png) | ![Bode with gain/phase margins, control view, state-space export](12-bode-gm-pm.png) |
 | ![Live Class-AB amplifier](01-circuit-live-amp.png) | ![Diode & zener live physics](02-diode-zener-live.png) |
 | ![H(s) → circuit synthesis](03-hs-synthesis.png) | ![Block diagrams & Mason](04-block-mason.png) |
 | ![RF Lab Smith chart matching](05-rf-smith-match.png) | ![Modulation & EVM](06-modulation-evm.png) |
