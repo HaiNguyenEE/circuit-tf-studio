@@ -1,171 +1,83 @@
-<!--
-  Circuit ⇄ Transfer Function Studio — public project page
-  Copyright © 2026 Hai Nguyen. All rights reserved.
-  This page describes the application. The source code is NOT published here.
--->
+# ⚡ eerfLab — Circuit ⇄ Transfer Function Studio
 
-<h1 align="center">Circuit ⇄ Transfer Function Studio</h1>
+### The free, offline-first Electrical Engineering & RF lab in a single file — from schematic to H(s), Bode, root locus, state-space, SPICE-grade transient physics, and back to a suggested circuit topology.
 
-<p align="center">
-  <b>A free, offline, browser-based studio for circuits, control systems, and RF / microwave design.</b><br>
-  <i>Một studio miễn phí, chạy offline trên trình duyệt cho mạch điện, hệ điều khiển, và thiết kế RF / vi ba.</i>
-</p>
+**🌐 Live app: [eerflab.com](https://eerflab.com)** · runs 100 % in your browser · no install · no account · works offline
 
-<p align="center">
-  <a href="https://eerflab.com"><img alt="Live demo" src="https://img.shields.io/badge/▶%20Live%20App-Open%20in%20browser-4f46e5?style=for-the-badge"></a>
-  &nbsp;
-  <img alt="Runs offline" src="https://img.shields.io/badge/Runs-100%25%20offline-059669?style=for-the-badge">
-  &nbsp;
-  <img alt="Install" src="https://img.shields.io/badge/Install-none%20needed-0369a1?style=for-the-badge">
-</p>
-
-<p align="center">
-  <b>▶ Try it now — Dùng thử ngay:</b> &nbsp; <a href="https://eerflab.com"><b>eerflab.com</b></a><br>
-  <sub>No sign-up, no install, nothing to download — it runs entirely in your browser. · Không cần đăng ký, không cài đặt — chạy hoàn toàn trong trình duyệt.<br>
-  Mirror: <a href="https://eestudio.pages.dev">eestudio.pages.dev</a> · Current release: <b>v2.48.1</b> — 2026-07-18</sub>
-</p>
+**🇻🇳 Phòng thí nghiệm Điện – Điện tử – RF miễn phí, chạy hoàn toàn offline trong trình duyệt: từ sơ đồ mạch → hàm truyền H(s) → Bode / quỹ đạo nghiệm / không gian trạng thái → mô phỏng vật lý thật → và gợi ý ngược lại topology mạch.**
 
 ---
 
-## What is this? · Đây là gì?
+## 🧭 A complete solution — Schematic → Simulation → Analysis → Suggested Topology
 
-**EN —** Circuit ⇄ Transfer Function Studio is an interactive teaching-and-design tool that connects three worlds that are usually taught separately: **analog circuits**, **control systems**, and **RF / microwave engineering**. Build a circuit and read its exact transfer function *H(s)*; go the other way and turn an *H(s)* into a real op-amp circuit; draw a block diagram and let Mason's rule solve it; or open the **RF Lab** to design matching networks, amplifiers, resonators, and microstrip lines with a live S-parameter solver, Smith chart, and optimizer. Every result is computed in your browser — nothing is uploaded, and it keeps working with no internet connection.
+Most tools give you one link of the chain. **eerfLab gives you the whole loop, in both directions:**
 
-**VN —** Đây là công cụ tương tác vừa để **học** vừa để **thiết kế**, nối liền ba mảng thường được dạy riêng lẻ: **mạch analog**, **hệ điều khiển**, và **kỹ thuật RF / vi ba**. Vẽ mạch để đọc ra hàm truyền *H(s)* chính xác; hoặc đi ngược lại, biến một *H(s)* thành mạch op-amp thật; vẽ sơ đồ khối và để công thức Mason giải; hoặc mở **RF Lab** để thiết kế mạng phối hợp, mạch khuếch đại, cộng hưởng và đường vi dải với bộ giải S-parameter thời gian thực, Smith chart và tối ưu hoá. Mọi tính toán chạy ngay trong trình duyệt — không gửi dữ liệu đi đâu, và vẫn hoạt động khi không có internet.
+| Step | What you get | Công cụ |
+|---|---|---|
+| **1 · Schematic** | Drag-and-drop schematic editor: sources, passives, diodes/zeners/LEDs, BJT/MOSFET/JFET, transformers, machines, pots/trimmers, relays, fuses, speakers — plus a library of **93 exact, datasheet-verified ICs** picked by real MPN | Vẽ mạch kéo-thả, linh kiện thật theo mã |
+| **2 · Simulation** | One click ▶ — DC operating point, AC → H(s), and a **real time-domain transient engine**: exponential Ebers-Moll BJTs (SPICE `pnjlim` convergence), switch-level power MOSFETs, coupled-inductor transformers, dq-model electric machines, I²t & power-rating "boom" physics, honest refusals when an op point is non-physical | Mô phỏng ⏱ vật lý thật, linh kiện quá tải nổ như đời thực |
+| **3 · Analysis** | Exact **H(s)** (MNA nodal analysis + minimal rational fit), factored poles/zeros, Bode with GM/PM markers, step, Nyquist + encirclement criterion, **root locus**, closed-loop step, **state-space ẋ = Ax+Bu (controllable canonical)** with one-click **MATLAB / Python export**, Monte Carlo, noise, FFT/THD, PCB trace calculators (IPC-2221/2152) | Phân tích H(s), Bode, Nyquist, quỹ đạo nghiệm, không gian trạng thái, xuất MATLAB/Python |
+| **4 · Suggested topology** | Type ANY H(s) and the studio **designs circuits for you**: cascade of first/second-order op-amp stages with concrete E-series R/C values, **KHN state-variable biquads**, lag/lead compensators, and the full **analog-computer integrator chain** — each stage openable back in the Circuit Lab. RHP poles are flagged honestly ("needs a stabilizing loop"), never hidden | Nhập H(s) bất kỳ → app tự đề xuất mạch: cascade op-amp, KHN biquad, chuỗi tích phân analog computer — mở ngược lại vào Circuit Lab |
 
----
-
-## Screenshots · Ảnh minh hoạ
-
-**Live Circuit Lab — DC bias (⎓ .op) then small-signal (∿ .ac) → exact H(s), the SPICE way · Circuit Lab trực tiếp — phân cực DC rồi tín hiệu nhỏ → H(s) chính xác**
-
-![Live Circuit Lab amplifier](01-circuit-live-amp.png)
-
-**Nonlinear diode engine — a Zener regulator clamping live, with real breakdown voltage, current & power shown on the part · Bộ ổn áp Zener kẹp áp trực tiếp, hiện V/I/P thật trên linh kiện**
-
-![Diode / Zener live](02-diode-zener-live.png)
-
-**Exact-MPN IC library — a TL431 shunt regulator servoing 5.01 V live, with real branch currents on every meter · Thư viện IC chính xác theo mã linh kiện — TL431 ổn áp 5.01 V trực tiếp, hiện dòng thật trên từng nhánh**
-
-![Exact-MPN IC library in the Circuit Lab](07-ic-library-exact-mpn.png)
-
-**Time-domain bench — an NE555 astable blinking a real LED, with forward voltage, current & power live on the part · Bench miền thời gian — NE555 nháy LED thật, hiện V/I/P ngay trên linh kiện**
-
-![555 astable blinking live](08-555-blinker-live.png)
-
-**H(s) → Circuit synthesis — a transfer function realized as a real op-amp circuit with E24 values · Tổng hợp H(s) → mạch op-amp thật với giá trị E24**
-
-![H(s) to circuit synthesis](03-hs-synthesis.png)
-
-**Block Diagrams & Mason — Y/R solved by Mason's gain formula, every forward path and loop listed · Sơ đồ khối & Mason — giải Y/R bằng công thức Mason**
-
-![Block diagrams and Mason](04-block-mason.png)
-
-**RF Lab — single-stub matching with the live Smith chart and S-parameters · RF Lab — phối hợp single-stub với Smith chart & S-parameter thời gian thực**
-
-![RF Lab Smith chart matching](05-rf-smith-match.png)
-
-**Modulation & EVM — a QAM constellation through AWGN, phase noise and PA compression · Điều chế & EVM — chòm sao QAM qua nhiễu, pha và nén PA**
-
-![Modulation and EVM](06-modulation-evm.png)
+That loop — **circuit → math → circuit** — is what makes eerfLab a *studio*, not just a simulator.
 
 ---
 
-## Features · Tính năng
+## 🆕 What's new (v2.76 line)
 
-### 🔧 Circuit Lab → H(s)
-Build any linear circuit — resistors, capacitors, inductors, op-amps, dependent sources, BJT/MOS small-signal — from a **topology library**, a **drag-and-drop schematic editor**, custom Z₁/Z₂ impedances, or a **freeform netlist**. The app solves the node equations symbolically in *s* and gives you the **exact transfer function H(s)**, plus **Bode**, **Nyquist**, **pole/zero** maps, and the **step response**. Hover any point for exact values.
-
-### ⚡ Live Circuit Lab — meters, scope & a real transient engine
-The schematic is a **live bench**: voltmeters, ammeters and wattmeters read continuously, animated **current-flow dots** trace every series loop, and a four-channel **oscilloscope** shows the real waveforms. `⎓ .op` solves the **large-signal DC operating point** (real 0.7 V junctions, assume-and-verify) and `∿ .ac` runs the small-signal pass around it — **SPICE-style: pure-DC sources are treated as bias (AC ground) automatically**, so an amplifier sheet with a DC rail plus one AC input solves directly. Press **▶ Simulate** for the time-domain engine: switches, relays, the 555, logic gates and real **74xx / 40xx ICs** — including the **exact-MPN datasheet-verified library below** — 7-segment displays and an 8×8 **LED matrix**.
-
-### 🩺 Honest semiconductor models — the nonlinear diode engine
-Diodes run a real nonlinear model: forward knee or **SPICE-like exponential**, junction capacitance C<sub>j</sub>(V), reverse recovery t<sub>rr</sub>, and **reverse breakdown** with avalanche / Zener / TVS clamping — plus honest **OVERCURRENT / OVERPOWER / T<sub>j</sub>** warnings and "no series resistor" traps that show the REAL numbers instead of hiding them. Ships with **datasheet-verified presets** (every value cites its source PDF): 1N4148, 1N4001–4007, 1N5817–19, **BAT54**, **SS14 / SS34**, the **SMAJ TVS family** (incl. bidirectional CA) and **BZX55 Zeners** with two-segment soft-knee breakdown.
-
-### 🔬 Exact-MPN IC library — datasheet-verified digital & analog parts
-Beyond generic gates, the Circuit Lab ships a library of **83 real, orderable parts** (74HC / 74HCT / CD4000 plus a full **analog & mixed-signal tier** — Texas Instruments and Nexperia), each simulated **from its own manufacturer datasheet**: verified pin maps (pin numbers *and* names), per-family input thresholds (**74HC ratio** vs **74HCT TTL-fixed** vs **CD4000**, plus true **Schmitt-trigger hysteresis** with datasheet V<sub>T+</sub>/V<sub>T−</sub>), propagation delays, and **setup-time checking** on clocked devices. The engine is a **4-state logic kernel (0 / 1 / X / Z)** built to be *honest*: an unknown is reported as **X — never guessed** — and floating CMOS inputs, bus contention, and unpowered chips raise plain-language diagnostics instead of silently reading wrong. Every record carries **golden tests derived from the datasheet's own function tables and waveforms**, plus regression **guards for infamous look-alike pairs** (HC125 vs HC126 enable polarity, HC240/241/244, HC157 vs HC257, HC192 decade vs HC193 binary, CD4020 vs CD4040 pin layouts, CD4029's pin-9 trap vs the CD4510/4516…). The verification process is thorough enough that it **caught a real erratum in a TI datasheet** (CD74HC147: the §5 pin table prints an "I0 input" on pin 9 — the TOP-VIEW figure and the device's own logic prove it is the Y0 output; the record documents it). Counters, shift registers, latches, decoders, priority encoders, multiplexers, magnitude/identity comparators, bus drivers and transceivers, ripple dividers, and up/down counters are all in the picker — alongside a real **analog & mixed-signal tier** simulated inside the analog solver itself: **NE555 / NE556** timers whose comparators watch the *real* CONT-pin voltage (the internal 5 kΩ string is stamped into the solver, so control-voltage tricks genuinely move both trip points), **TL431 / TL432** programmable shunt references that servo their actual feedback divider, real op-amps — **LM358, LM324, TL081, TL082, LM741** — with datasheet offset, output swing and a true **gain-bandwidth dominant-pole model** (a ×101 LM358 stage really is −3 dB at GBW/101), **LM393 / LM339** open-collector comparators, **CD4066** analog switches and the **CD4051 / 4052 / 4053** multiplexer family passing real analog signals, the **74HC123** monostable timed by the *physical* R and C you wire to its pins, the **CD4029 / CD4510 / CD4516** presettable up/down counters, and the **CD74HC4046A PLL** — a linear VCO whose frequency comes from the REAL R1/R2/C1 wired to its pins, plus all three phase comparators (PC1 XOR, PC2 tri-state PFD with its PCP lock flag, PC3 RS-FF). Parts **warn ⚠ before they fail — and "boom" when abused** (overcurrent, overpower, missing supply) — and while a transient run is live the bench keeps reading: **animated current dots, per-branch current labels, and voltmeter/ammeter faces** update in real time. One-click **Load examples** set up showcase benches — a blinking 555, a TL431 5 V regulator, an LM358 output-swing demo, and a complete **PLL locking onto a 3 kHz input** with a LOCK LED on PCP<sub>OUT</sub> and the control voltage settling live on a meter face. *Next up: a built-in bilingual lecture for the exact-IC library, and more analog parts from the 273-row research plan.*
-
-*Thư viện IC chính xác theo mã linh kiện: 83 chip thật, mô phỏng từ chính datasheet của từng con — sơ đồ chân kiểm chứng, ngưỡng vào theo đúng họ, trễ lan truyền, kiểm tra setup-time; kernel logic 4 trạng thái trung thực (không bao giờ đoán), kèm golden tests trích từ bảng chức năng của datasheet. Tầng analog cũng thật như vậy: NE555/556, TL431/432, op-amp thật (LM358, LM324, TL081, TL082, LM741) với mô hình băng thông GBW đúng datasheet, so sánh LM393/LM339, khoá analog CD4066 và họ mux CD4051/52/53 dẫn tín hiệu thật, monostable 74HC123 chạy bằng R/C thật trên chân, bộ đếm CD4029/4510/4516, và PLL CD74HC4046A — VCO chạy bằng đúng R1/R2/C1 nối trên mạch, đủ ba phase comparator, kèm ví dụ khoá 3 kHz với LED LOCK. Linh kiện cảnh báo ⚠ trước khi hỏng và "nổ" khi bị ép quá mức; khi mô phỏng transient, chấm dòng, nhãn dòng từng nhánh và mặt đồng hồ đo đều cập nhật trực tiếp. Tiếp theo: bài giảng song ngữ cho thư viện IC và thêm linh kiện analog từ kế hoạch 273 dòng.*
-
-### 🧮 H(s) → Circuit (synthesis)
-Type a transfer function and get **real circuits that realize it** — Sallen-Key / MFB biquads, lead-lag, PID, and integrator-chain (analog-computer) forms — with **E24 component values** and an honest quality report (*exact / scaled / inverted*).
-
-### 🧩 Block Diagrams & Mason
-Draw a block diagram or signal-flow graph (or **trace over an uploaded figure**) and the app computes *Y/R* with **Mason's gain formula**, listing every forward path, loop, and Δ term step by step.
-
-### 📡 RF Lab — ten workspaces
-- **★ Schematic Designer** — a free-form RF bench: lumped R/L/C, transmission lines, open/short stubs, microstrip, `.s2p` devices, ideal amplifiers, attenuators, transformers, and complex loads. A per-frequency **nodal S-parameter solver** returns **S11/S21/S12/S22**, phase, group delay, **VSWR**, **Zin(f)**, Nyquist and **Smith-chart** views — all on **interactive plots** (wheel-zoom, drag-pan, click datatips).
-- **Tune · Sweep · Optimize** — tick any parameter to get a live slider; **parameter sweeps** overlay curve families; **Monte-Carlo** reports yield against your goals; the **GOAL / OPTIM** optimizer (random or gradient) matches or beats your S-parameter targets.
-- **Network & S-parameters** — cascade ABCD blocks and convert to S-parameters.
-- **Device (.s2p) & amplifier** — load a Touchstone file, compute **K, |Δ|, μ, MSG/MAG**, draw **stability & gain circles**, and design a **simultaneous-conjugate-match** amplifier.
-- **Matching calculator** — **L-section** and **single-stub** (open & short) networks with the **Smith-chart path** drawn out.
-- **LineCalc + 2D EM** — microstrip synthesis/analysis (Hammerstad–Jensen) plus a real **finite-difference 2D field solver**.
-- **Antennas & link budget** — dipole/patch sizing and the **Friis** equation.
-- **Harmonic balance (PA)** — gain compression **P1dB**, harmonics, two-tone **IM3 / OIP3**.
-- **System budget & mixer** — cascade **gain / noise figure (Friis) / OIP3** and a mixer **spur table**.
-- **Eye diagram (SI)** and **Modulation & EVM** — send a PRBS through a lossy channel, or push QPSK…QAM-64 through AWGN, phase noise, and PA compression, and read the constellation + **EVM**.
-
-### 📚 Built-in bilingual lectures
-Every tool has a step-by-step **EN–VN lecture**: the theory in 60 seconds, a worked example with symbols and units, a walkthrough on the tool itself, and a check-yourself quiz.
-
-### 💾 Truly offline
-The whole studio is a **single HTML file**. No install, no accounts, no tracking — and it keeps running with the internet unplugged. Save the page and it is yours to use anywhere.
+- **⚡ SG3525 + IRFZ44N H-bridge inverter — 12 V → 230 V / 50 Hz** (REAL CHIP). We took a widely-shared web schematic, **debugged it against the ST/onsemi datasheets**, fixed its real errors (error-amp reference, shutdown-chain sizing, overvoltage-trim math), and shipped it as a live example: true bootstrap gate drive, PWM latch (one pulse per period), 50 µA soft-start you can watch, low-battery LM393 shutdown with red-LED alarm. The oscilloscope shows the 230 V quasi-square being born.
+- **🔌 Transformer goes time-domain** — coupled-inductor model (Lp, Ls, M, coupling k) live in transient, powering the inverter's 12:233 step-up.
+- **📡 SG3525AN & LM393P join the exact-IC library** — oscillator law `f = 1/(CT·(0.7·RT + 3·RD))` sensed from *your* drawn RT/CT/RD parts, push-pull steering at f/2, error amp as a real Norton stage so your compensation network actually closes the loop.
+- **⚙ Electric machines trilogy** — 3φ induction **motor** (full stationary-frame dq dynamic model, EE 350 Lab 8 reproduced row-for-row), 3φ induction **generator** (drive past synchronous, watch power flow reverse into the grid), and the separately-excited **DC motor** (Lab 7: field time-constant, armature inrush, weak-field overshoot — all real).
+- **🔊 Class-AB power amplifier, FULL 22-transistor build** (2SC5200/2SA1943 triple-EF output, LED-referenced current sources, cascoded VAS) — decoded 1:1 from the original schematic print, with the DC operating point solved by a new **pseudo-transient soft-power-up** DCOP engine.
+- **🧨 Physics that tells the truth** — exponential BJTs (E45), a DCOP rescue ladder (source ramp → gmin → pseudo-transient continuation, E46), and hard refusal of non-physical operating points instead of silently destroying parts (E44).
 
 ---
 
-## Quick start · Bắt đầu nhanh
+## 📊 By the numbers
 
-**EN**
-1. Open **[eerflab.com](https://eerflab.com)**.
-2. Pick a tab at the top: *Circuit Lab*, *H(s) → Circuit*, *Blocks*, or *RF Lab*.
-3. In **RF Lab**, choose a part from the palette, click the canvas to place it, then wire **pin → pin**. Set your frequency sweep and substrate, and press **Simulate**.
-4. Read the plots; **hover** for exact numbers; tick a value **tunable** to get a slider, or press **⚡ Optimize**.
-5. Open the **📚 lecture** under any tool if you want the theory and a guided walkthrough.
-
-**VN**
-1. Mở **[eerflab.com](https://eerflab.com)**.
-2. Chọn tab ở trên cùng: *Circuit Lab*, *H(s) → Circuit*, *Blocks*, hoặc *RF Lab*.
-3. Trong **RF Lab**, chọn linh kiện ở thư viện, click lên canvas để đặt, rồi nối **chân → chân**. Đặt dải quét tần số và substrate, bấm **Simulate**.
-4. Đọc đồ thị; **rê chuột** để xem số chính xác; tick **tunable** để có thanh trượt, hoặc bấm **⚡ Optimize**.
-5. Mở **📚 bài giảng** dưới mỗi công cụ nếu muốn xem lý thuyết và hướng dẫn từng bước.
+- **93 exact ICs** — datasheet-verified, pin-for-pin, picked by MPN (NE555P, TL431, LM358/LM324/LM741, LM393/LM339, TL08x/TL43x, CD4000 & 74HC logic families, CD74HC4046A PLL, MAX4374, MC34063, TL494, UC3842, **SG3525AN**, …) with per-part golden tests and refusal diagnostics (floating pins, missing supply, out-of-range VCC)
+- **273-row research pipeline** of further parts, none placeable until verified — accuracy over quantity
+- **60 + generic component models** — R/L/C/pots, diode family with breakdown & thermal ratings, BJT/MOSFET/JFET, transformers (incl. tapped), machines, relays, fuses, thermistor/LDR/varistor/varactor, speakers, crystals…
+- **10 auto-running live examples** — battery protector (MAX4374), 180 V boost (MC34063 + IRF644), **SG3525 inverter**, 3φ motor, 3φ generator, DC motor, 555 blinker, TL431 regulator, LM358 swing lesson, HC4046 PLL lock — each with a bilingual engineering walk-through in the hint
+- **2,000 + automated regression checks** run before every release — solver math, IC golden tests, preset physics, UI lint
+- **4 integrated labs** — Circuit Lab → H(s) · H(s) → Circuit · Block Diagrams & Mason's gain formula · RF Lab (Smith chart, S-parameters, matching, stability circles)
+- **1 file, 0 servers** — the whole studio ships as a single offline HTML file
 
 ---
 
-## Who is it for? · Dành cho ai?
+## 🎓 Who it's for
 
-Students learning circuit analysis, control systems, or RF/microwave engineering; instructors who want a live classroom demo; and engineers who need a quick, dependable sandbox for matching networks, amplifier stability, and S-parameter intuition — without launching heavyweight EDA software.
+- **Students** — see *why* the textbook Bode plot looks that way; drag a slider and watch poles move
+- **Educators** — every live example is a prepared lecture: real chips, real failure modes, honest limitations
+- **Practicing engineers** — quick H(s) sanity checks, compensator sketches, state-space export to MATLAB/Python, PCB trace-width math
+- **Hobbyists & makers** — build the inverter or the 555 blinker exactly like the web schematic — except this one has been debugged for you
 
-*Sinh viên học phân tích mạch, hệ điều khiển hay RF/vi ba; giảng viên cần demo trực quan trên lớp; và kỹ sư cần một môi trường nhanh, đáng tin cậy cho mạng phối hợp, ổn định mạch khuếch đại và trực giác S-parameter — mà không phải mở phần mềm EDA nặng nề.*
-
----
-
-## ♥ Support · Ủng hộ
-
-**EN —** This studio is free and ad-free, and it runs real solvers on a live server so anyone can use it right in the browser. If it helps you, a small donation helps **keep the servers online** and the whole studio **running and free for everyone**. Thank you for chipping in 🙏
-
-**VN —** App miễn phí, không quảng cáo, chạy solver thật trên server để ai cũng dùng được ngay trên trình duyệt. Nếu thấy hữu ích, một khoản ủng hộ nhỏ giúp **duy trì server** và giữ mọi thứ **luôn chạy, miễn phí cho mọi người**. Cảm ơn bạn 🙏
-
-<p align="center">
-  <a href="https://paypal.me/thanhhaixnguyen"><img alt="Donate with PayPal" src="https://img.shields.io/badge/💳%20Donate%20with%20PayPal-003087?style=for-the-badge"></a>
-  &nbsp;
-  <a href="https://ko-fi.com/hainguyen86"><img alt="Support on Ko-fi" src="https://img.shields.io/badge/☕%20Ko--fi-FF5E5B?style=for-the-badge"></a>
-</p>
-
-<sub>🔒 Ko-fi accepts PayPal, cards, Apple Pay &amp; Google Pay, with checkout hosted securely by the provider (PCI-compliant) — no card details are ever handled by this project. — Ko-fi nhận PayPal, thẻ, Apple/Google Pay; thanh toán bảo mật do nhà cung cấp xử lý, dự án không bao giờ chạm vào thông tin thẻ.</sub>
+*No account. No cloud. Your designs stay on your machine.*
 
 ---
 
-## Usage & license · Sử dụng & bản quyền
+## 🖼 Screenshots
 
-**EN —** This project is **free to use, but not open source.** You are welcome to use the hosted web application at no cost for personal, educational, and professional work. The source code is **proprietary and is not published**: copying, redistributing, modifying, reverse-engineering, or creating derivative works is **not permitted** without prior written consent. See [`LICENSE`](LICENSE).
-
-**VN —** Dự án này **miễn phí sử dụng, nhưng không phải mã nguồn mở.** Bạn được dùng miễn phí ứng dụng web cho mục đích cá nhân, học tập và công việc. Mã nguồn là **tài sản riêng và không được công bố**: nghiêm cấm sao chép, phân phối lại, chỉnh sửa, dịch ngược hay tạo sản phẩm phái sinh khi **chưa có** sự đồng ý bằng văn bản. Xem [`LICENSE`](LICENSE).
+| | |
+|---|---|
+| ![Live Class-AB amplifier](01-circuit-live-amp.png) | ![Diode & zener live physics](02-diode-zener-live.png) |
+| ![H(s) → circuit synthesis](03-hs-synthesis.png) | ![Block diagrams & Mason](04-block-mason.png) |
+| ![RF Lab Smith chart matching](05-rf-smith-match.png) | ![Modulation & EVM](06-modulation-evm.png) |
+| ![Exact-MPN IC library](07-ic-library-exact-mpn.png) | ![NE555 blinker running](08-555-blinker-live.png) |
 
 ---
 
-## Contact · Liên hệ
+## 🔑 Keywords / Từ khóa
 
-**Hai Nguyen** — Electrical Engineering
-🔗 [linkedin.com/in/hai-nguyen-ee](https://www.linkedin.com/in/hai-nguyen-ee)
+free online circuit simulator · transfer function calculator · H(s) from circuit · Bode plot online · Nyquist plot · root locus tool · state-space realization · controllable canonical form · MNA nodal analysis · SPICE alternative in browser · op-amp filter synthesis · KHN biquad designer · Sallen-Key · lag lead compensator · Mason's gain formula solver · signal flow graph · Smith chart matching · S-parameters · SG3525 inverter simulation · MC34063 boost converter · class AB amplifier design · 555 timer circuit · PLL CD4046 · three-phase induction motor simulation · DC motor transient · power electronics lab · electrical engineering education — mô phỏng mạch điện online miễn phí · hàm truyền · đồ thị Bode · quỹ đạo nghiệm · tổng hợp mạch op-amp · mạch nghịch lưu SG3525 · động cơ không đồng bộ 3 pha · phòng thí nghiệm điện tử ảo
 
-<p align="center"><sub>© 2026 Hai Nguyen. All rights reserved. — Bản quyền © 2026 Hải Nguyễn. Bảo lưu mọi quyền.</sub></p>
+---
+
+## 🚀 Try it now
+
+**→ [eerflab.com](https://eerflab.com)** — press **Load example**, pick the ⚡ SG3525 inverter, and watch a 12 V battery become 230 V AC in front of you.
+
+*Built with an obsession for honest physics: if the model can't simulate something faithfully, it says so — in English and Vietnamese.*
+
+— **Hai (Steve) Nguyen** · Electrical Engineering, CSULB · [LinkedIn](https://www.linkedin.com/in/hai-nguyen-ee)
